@@ -1,54 +1,48 @@
 """
-# **Genome Visualization Tool**
+# **Gene Expression Analysis Tool**
 
 ## **Overview**
-This tool visualizes genomic data by combining transcript alignment, read coverage, and gene annotation information. It creates a comprehensive figure containing three panels: 
-1. Transcript alignment from PSL files.
-2. Read coverage histogram.
-3. Gene annotation from GTF files.
+This tool analyzes gene expression data from control and treatment conditions. It performs normalization, computes statistical metrics, calculates log2 fold changes, and evaluates differential gene expression significance.
 
 ---
 
 ## **Features**
-1. **Transcript Alignment Visualization**:
-   - Parses PSL files to extract alignment information.
-   - Visualizes alignments as horizontal lines with block structures for exons.
+1. **Normalization**:
+   - Normalizes gene expression counts by dividing each gene's expression by the total expression in each sample.
 
-2. **Read Coverage Histogram**:
-   - Computes nucleotide-level coverage from PSL files.
-   - Displays coverage data as a histogram.
+2. **Mean and Median Expression**:
+   - Computes mean and median normalized expression for each gene in control and treatment groups.
 
-3. **Gene Annotation Visualization**:
-   - Parses GTF files for exon and CDS annotations.
-   - Visualizes annotations as bars in a dedicated panel.
+3. **Log2 Fold Change**:
+   - Calculates log2 fold changes to assess relative expression differences.
 
-4. **Output**:
-   - Saves the visualization as a high-resolution PNG file.
+4. **Statistical Testing (Tier 2)**:
+   - Performs a Mann-Whitney U test for each gene to calculate p-values for significant expression changes.
+
+5. **Output**:
+   - Generates a ranked, tab-delimited file of gene statistics, including fold changes and p-values.
 
 ---
 
 ## **Dependencies**
 - **Python 3.x**
-- **Matplotlib** (`pip install matplotlib`)
-- **NumPy** (`pip install numpy`)
 
 ---
 
 ## **Input Files**
-1. **PSL File**:
-   - Contains transcript alignment data (e.g., `BME163_Input_Data_6.psl`).
-2. **GTF File**:
-   - Contains gene annotations (e.g., `gencode.vM12.annotation.gtf`).
+1. **Control Directory**:
+   - Contains 100 CSV files for control conditions.
+2. **Treatment Directory**:
+   - Contains 100 CSV files for treatment conditions.
 
 ---
 
 ## **Usage**
 1. **Input Arguments**:
-   - `--outputFile` (`-o`): Name of the output PNG file. Default: `g.png`
-   - `--inputFile` (`-i`): Path to the PSL input file. Default: `/path/to/your/data.psl`
-   - `--outTextFile` (`-t`): Name of the output text file. Default: `Lecture4.data`
+   - `<path_to_controls>`: Path to the control directory.
+   - `<path_to_treatments>`: Path to the treatment directory.
 
 2. **Execution**:
    Run the script in a Python environment:
    ```bash
-   python genome_visualization.py --outputFile output.png --inputFile input.psl --outTextFile output.txt
+   python Firstname_Lastname_Tier1.py <path_to_controls> <path_to_treatments>
